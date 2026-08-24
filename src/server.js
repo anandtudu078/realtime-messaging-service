@@ -1,7 +1,8 @@
-const app = require("./app");
-const env = require("./config/env");
-const connectDatabase = require("./config/database");
-const dns = require('dns');
+import app from "./app.js";
+import env from "./config/env.js";
+import connectDatabase from "./config/database.js";
+import dns from 'dns';
+// Point to Google DNS
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 
 

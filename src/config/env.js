@@ -1,4 +1,6 @@
-require("dotenv").config();
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const env = {
   nodeEnv: process.env.NODE_ENV || "development",
@@ -6,4 +8,4 @@ const env = {
   mongoUri: process.env.MONGODB_URI,
 };
 
-module.exports = env;
+export default env;

@@ -11,7 +11,7 @@
     "url": "git+https://github.com/anandtudu078/realtime-messaging-service.git"
   },
   "author": "Anand Tudu",
-  "type": "commonjs",
+  "type": "module",
   "main": "index.js",
   "scripts": {
   "dev": "nodemon src/server.js",
