@@ -1,4 +1,6 @@
 import express from "express";
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 
@@ -10,5 +12,8 @@ app.get("/health", (req, res) => {
     message: "Messaging service is healthy",
   });
 });
+
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", userRoutes);
 
 export default app;
