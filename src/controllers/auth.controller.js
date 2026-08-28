@@ -27,6 +27,7 @@ const register = async (req, res) => {
   }
 };
 
+//login
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -54,7 +55,29 @@ const login = async (req, res) => {
   }
 };
 
+//current user
+const me = async (req, res) => {
+  try {
+    const user = await authService.getCurrentUser(req.user.userId);
+
+    res.status(200).json({
+      success: true,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export default {
   register,
   login,
+  me,
 };

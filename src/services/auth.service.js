@@ -58,6 +58,14 @@ const loginUser = async ({ email, password }) => {
     }
   );
 
+  const getCurrentUser = async (userId) => {
+  const user = await User.findById(userId).select("-passwordHash");
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+};
+
   return {
     token,
     user,

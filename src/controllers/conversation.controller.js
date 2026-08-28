@@ -46,7 +46,27 @@ const getMyConversations = async (req, res) => {
   }
 };
 
+const getConversationById = async (req, res) => {
+  try {
+    const conversation = await conversationService.getConversationById(
+      req.params.id,
+      req.user.userId
+    );
+
+    return res.status(200).json({
+      success: true,
+      conversation,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 export default {
   createConversation,
   getMyConversations,
+  getConversationById,
 };
