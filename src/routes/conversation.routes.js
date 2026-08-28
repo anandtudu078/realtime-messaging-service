@@ -17,4 +17,10 @@ router.get(
   conversationController.getMyConversations
 );
 
+router.get(
+  "/:id",
+  authMiddleware,
+  conversationController.getConversationById
+);
+
 export default router;

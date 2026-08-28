@@ -37,7 +37,27 @@ const getUserConversations = async (userId) => {
   });
 };
 
+const getConversationById = async (conversationId, userId) => {
+  const membership = await ConversationMember.findOne({
+    conversationId,
+    userId,
+  });
+
+  if (!membership) {
+    throw new Error("Conversation not found or access denied");
+  }
+
+  const conversation = await Conversation.findById(conversationId);
+
+  if (!conversation) {
+    throw new Error("Conversation not found");
+  }
+
+  return conversation;
+};
+
 export default {
   createConversation,
   getUserConversations,
+  getConversationById,
 };
