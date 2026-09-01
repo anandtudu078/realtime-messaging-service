@@ -85,3 +85,41 @@ export const getMessageHistory = async ({
     },
   };
 };
+
+
+export const createMessage = async ({
+  conversationId,
+  userId,
+  content,
+}) => {
+  // 1. Validate message content
+  if (!content || !content.trim()) {
+    const error = new Error("Message content is required");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  // 2. Check whether the user belongs to the conversation
+  const membership = await ConversationMember.findOne({
+    conversationId,
+    userId,
+  });
+
+  if (!membership) {
+    const error = new Error("You are not a member of this conversation");
+    error.statusCode = 403;
+    throw error;
+  }
+
+  // 3. Create the message
+  const message = await Message.create({
+    conversationId,
+    senderId: userId,
+    content: content.trim(),
+  });
+
+  // 4. Populate sender information
+  await message.populate("senderId", "name email");
+
+  return message;
+};
